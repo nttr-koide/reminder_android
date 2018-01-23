@@ -10,6 +10,11 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-
+        //完了ボタン、編集内容を保存
+        //通知有無はシークバー
+        //ボタンと選択するためのフラグメント実装
+    }
+    @Override
+    public void onBackPressed() {
     }
 }

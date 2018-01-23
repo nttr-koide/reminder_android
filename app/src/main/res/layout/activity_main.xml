@@ -7,6 +7,7 @@
     tools:context="com.example.nttr.reminder.MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -17,7 +18,9 @@
             android:id="@+id/edit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Button"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="323dp" />
 
         <ListView
             android:id="@+id/listView"
@@ -25,6 +28,8 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp" />
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

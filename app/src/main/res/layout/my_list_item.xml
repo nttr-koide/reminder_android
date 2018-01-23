@@ -10,3 +10,4 @@
     android:text="sample"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:textColor="#c8000000" />
+
