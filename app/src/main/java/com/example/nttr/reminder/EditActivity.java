@@ -14,7 +14,7 @@ public class EditActivity extends AppCompatActivity {
         //通知有無はシークバー
         //ボタンと選択するためのフラグメント実装
     }
-    @Override
-    public void onBackPressed() {
-    }
+//    @Override
+//    public void onBackPressed() {
+//    }
 }
