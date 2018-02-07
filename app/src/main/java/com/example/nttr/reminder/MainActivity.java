@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
             "German"
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
