@@ -11,7 +11,7 @@ public class ListData {
     String notificationSound;
     String vibration;
     String repeatInterval;
-    String note;
+    String content;
 
     public void setTitleName(String titleName){
         this.titleName = titleName;
@@ -61,11 +61,11 @@ public class ListData {
         return this.repeatInterval;
     }
 
-    public void setNote(String note){
-        this.note = note;
+    public void setContent(String note){
+        this.content = note;
     }
 
-    public String getNote(){
-        return this.note;
+    public String getContent(){
+        return this.content;
     }
 }

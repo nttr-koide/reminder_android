@@ -10,17 +10,10 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <!--- 押すと縮小するボタン -->
-
-        <Button
-            android:id="@+id/edit_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="323dp" />
 
         <ListView
             android:id="@+id/listView"

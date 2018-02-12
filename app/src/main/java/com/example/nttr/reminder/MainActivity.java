@@ -11,6 +11,8 @@ package com.example.nttr.reminder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,22 +26,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String[] countries = {
-            "America",
-            "Japan",
-            "China",
-            "Korea",
-            "British",
-            "German"
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();//
-//        ArrayList<String> reminderList = intent.getStringArrayListExtra("リマインダーリスト");//
+        //SharedPreferenceにデータがあればリストに表示
+        //preNameでリスト項目に対応するアラーム情報を保存する？
         final List<String> reminderList = new ArrayList<String>(){
             {
                 add("AA");
@@ -70,17 +63,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
-        Button editButton = (Button) findViewById(R.id.edit_button);
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EditActivity.class);
-                //put
-                startActivity(intent);
-            }
-        });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                // ボタンをタップした際の処理を記述
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+
+//                // 編集画面に渡すデータをセットし、表示
+//                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+//                intent.putExtra("NAME", mList.get(position).get("filename"));//マップのfilenameキーに対応する値を渡している
+//                intent.putExtra("TITLE", mList.get(position).get("title"));
+//                intent.putExtra("CONTENT", mList.get(position).get("content"));
+
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
+
 //    @Override
 //    public void onBackPressed() {
 //    }
