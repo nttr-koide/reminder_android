@@ -17,8 +17,12 @@ import android.widget.Button;
 
 import com.example.nttr.reminder.util.PreferenceUtil;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class PlaySoundActivity extends AppCompatActivity {
 
+    @BindView(R.id.stop)
     Button stop;
 
     @Override
@@ -29,10 +33,10 @@ public class PlaySoundActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_play_sound);
+        ButterKnife.bind(this);
 
         startService(new Intent(this, PlaySoundService.class));
 
-        stop = (Button) findViewById(R.id.stop);
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,5 +45,13 @@ public class PlaySoundActivity extends AppCompatActivity {
                 pref.delete(EditActivity.ALARM_TIME);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        stopService(new Intent(PlaySoundActivity.this, PlaySoundService.class));
+        PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
+        pref.delete(EditActivity.ALARM_TIME);
     }
 }

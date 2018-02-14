@@ -47,8 +47,6 @@ public class EditActivity extends AppCompatActivity {
     TextView dateTimeLabel;
     @BindView(R.id.date_time_button)
     Button dateTimeButton;
-    @BindView(R.id.date_time_switch)
-    Switch dateTimeSwitch;
     @BindView(R.id.date_time_linearlayout)
     LinearLayout dateTimeLinearlayout;
     @BindView(R.id.notification_sound_label)
@@ -96,98 +94,73 @@ public class EditActivity extends AppCompatActivity {
         setupViews();
         setListeners();
 
-        //指定時刻がセットされている時、項目を隠さない
-//        if(dateTimeButton.getText() != "なし") {
-//            dateTimeLabel.setVisibility(View.VISIBLE);
-//            dateTimeButton.setVisibility(View.VISIBLE);
-//            dateTimeSwitch.setVisibility(View.VISIBLE);
-//            dateTimeLinearlayout.setVisibility(View.VISIBLE);
-//
-//            notificationSoundLabel.setVisibility(View.VISIBLE);
-//            notificationSoundText.setVisibility(View.VISIBLE);
-//            notificationSoundButton.setVisibility(View.VISIBLE);
-//            notificationSoundLinearlayout.setVisibility(View.VISIBLE);
-//
-//            vibrationLabel.setVisibility(View.VISIBLE);
-//            vibrationText.setVisibility(View.VISIBLE);
-//            vibrationButton.setVisibility(View.VISIBLE);
-//            vibrationLinearlayout.setVisibility(View.VISIBLE);
-//
-//            repetitionLabel.setVisibility(View.VISIBLE);
-//            repetitionText.setVisibility(View.VISIBLE);
-//            repetitionButton.setVisibility(View.VISIBLE);
-//            repetitionLinearlayout.setVisibility(View.VISIBLE);
-//        }
-//        else{
-//            dateTimeLabel.setVisibility(View.GONE);
-//            dateTimeButton.setVisibility(View.GONE);
-//            dateTimeSwitch.setVisibility(View.GONE);
-//            dateTimeLinearlayout.setVisibility(View.GONE);
-//
-//            notificationSoundLabel.setVisibility(View.GONE);
-//            notificationSoundText.setVisibility(View.GONE);
-//            notificationSoundButton.setVisibility(View.GONE);
-//            notificationSoundLinearlayout.setVisibility(View.GONE);
-//
-//            vibrationLabel.setVisibility(View.GONE);
-//            vibrationText.setVisibility(View.GONE);
-//            vibrationButton.setVisibility(View.GONE);
-//            vibrationLinearlayout.setVisibility(View.GONE);
-//
-//            repetitionLabel.setVisibility(View.GONE);
-//            repetitionText.setVisibility(View.GONE);
-//            repetitionButton.setVisibility(View.GONE);
-//            repetitionLinearlayout.setVisibility(View.GONE);
-//        }
+        if(!notificationSwitch.isChecked()) {
+            dateTimeLabel.setVisibility(View.GONE);
+            dateTimeButton.setVisibility(View.GONE);
+            dateTimeLinearlayout.setVisibility(View.GONE);
+
+            notificationSoundLabel.setVisibility(View.GONE);
+            notificationSoundText.setVisibility(View.GONE);
+            notificationSoundButton.setVisibility(View.GONE);
+            notificationSoundLinearlayout.setVisibility(View.GONE);
+
+            vibrationLabel.setVisibility(View.GONE);
+            vibrationText.setVisibility(View.GONE);
+            vibrationButton.setVisibility(View.GONE);
+            vibrationLinearlayout.setVisibility(View.GONE);
+
+            repetitionLabel.setVisibility(View.GONE);
+            repetitionText.setVisibility(View.GONE);
+            repetitionButton.setVisibility(View.GONE);
+            repetitionLinearlayout.setVisibility(View.GONE);
+        }
 
 
-//        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked) {
-//                    dateTimeLabel.setVisibility(View.VISIBLE);
-//                    dateTimeButton.setVisibility(View.VISIBLE);
-//                    dateTimeSwitch.setVisibility(View.VISIBLE);
-//                    dateTimeLinearlayout.setVisibility(View.VISIBLE);
-//
-//                    notificationSoundLabel.setVisibility(View.VISIBLE);
-//                    notificationSoundText.setVisibility(View.VISIBLE);
-//                    notificationSoundButton.setVisibility(View.VISIBLE);
-//                    notificationSoundLinearlayout.setVisibility(View.VISIBLE);
-//
-//                    vibrationLabel.setVisibility(View.VISIBLE);
-//                    vibrationText.setVisibility(View.VISIBLE);
-//                    vibrationButton.setVisibility(View.VISIBLE);
-//                    vibrationLinearlayout.setVisibility(View.VISIBLE);
-//
-//                    repetitionLabel.setVisibility(View.VISIBLE);
-//                    repetitionText.setVisibility(View.VISIBLE);
-//                    repetitionButton.setVisibility(View.VISIBLE);
-//                    repetitionLinearlayout.setVisibility(View.VISIBLE);
-//                }
-//                else{
-//                    dateTimeLabel.setVisibility(View.GONE);
-//                    dateTimeButton.setVisibility(View.GONE);
-//                    dateTimeSwitch.setVisibility(View.GONE);
-//                    dateTimeLinearlayout.setVisibility(View.GONE);
-//
-//                    notificationSoundLabel.setVisibility(View.GONE);
-//                    notificationSoundText.setVisibility(View.GONE);
-//                    notificationSoundButton.setVisibility(View.GONE);
-//                    notificationSoundLinearlayout.setVisibility(View.GONE);
-//
-//                    vibrationLabel.setVisibility(View.GONE);
-//                    vibrationText.setVisibility(View.GONE);
-//                    vibrationButton.setVisibility(View.GONE);
-//                    vibrationLinearlayout.setVisibility(View.GONE);
-//
-//                    repetitionLabel.setVisibility(View.GONE);
-//                    repetitionText.setVisibility(View.GONE);
-//                    repetitionButton.setVisibility(View.GONE);
-//                    repetitionLinearlayout.setVisibility(View.GONE);
-//                }
-//            }
-//        });
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    dateTimeLabel.setVisibility(View.VISIBLE);
+                    dateTimeButton.setVisibility(View.VISIBLE);
+                    dateTimeLinearlayout.setVisibility(View.VISIBLE);
+
+                    notificationSoundLabel.setVisibility(View.VISIBLE);
+                    notificationSoundText.setVisibility(View.VISIBLE);
+                    notificationSoundButton.setVisibility(View.VISIBLE);
+                    notificationSoundLinearlayout.setVisibility(View.VISIBLE);
+
+                    vibrationLabel.setVisibility(View.VISIBLE);
+                    vibrationText.setVisibility(View.VISIBLE);
+                    vibrationButton.setVisibility(View.VISIBLE);
+                    vibrationLinearlayout.setVisibility(View.VISIBLE);
+
+                    repetitionLabel.setVisibility(View.VISIBLE);
+                    repetitionText.setVisibility(View.VISIBLE);
+                    repetitionButton.setVisibility(View.VISIBLE);
+                    repetitionLinearlayout.setVisibility(View.VISIBLE);
+                }
+                else{
+                    dateTimeLabel.setVisibility(View.GONE);
+                    dateTimeButton.setVisibility(View.GONE);
+                    dateTimeLinearlayout.setVisibility(View.GONE);
+
+                    notificationSoundLabel.setVisibility(View.GONE);
+                    notificationSoundText.setVisibility(View.GONE);
+                    notificationSoundButton.setVisibility(View.GONE);
+                    notificationSoundLinearlayout.setVisibility(View.GONE);
+
+                    vibrationLabel.setVisibility(View.GONE);
+                    vibrationText.setVisibility(View.GONE);
+                    vibrationButton.setVisibility(View.GONE);
+                    vibrationLinearlayout.setVisibility(View.GONE);
+
+                    repetitionLabel.setVisibility(View.GONE);
+                    repetitionText.setVisibility(View.GONE);
+                    repetitionButton.setVisibility(View.GONE);
+                    repetitionLinearlayout.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -215,7 +188,7 @@ public class EditActivity extends AppCompatActivity {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date(alarmTime);
             dateTimeButton.setText(df.format(date));
-            dateTimeSwitch.setChecked(true);
+            notificationSwitch.setChecked(true);
         }
     }
 
@@ -243,6 +216,7 @@ public class EditActivity extends AppCompatActivity {
                                 alarmCalendar.set(Calendar.SECOND, 0);
                                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 dateTimeButton.setText(df.format(alarmCalendar.getTime()));
+                                register(alarmCalendar.getTimeInMillis());
 
                             }
                         }, hour, minute, true);
@@ -253,16 +227,16 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        dateTimeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    register(alarmCalendar.getTimeInMillis());
-                } else {
-                    unregister();
-                }
-            }
-        });
+//        dateTimeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if (isChecked) {
+//                    register(alarmCalendar.getTimeInMillis());
+//                } else {
+//                    unregister();
+//                }
+//            }
+//        });
     }
 
     // 登録

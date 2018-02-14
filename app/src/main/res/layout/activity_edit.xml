@@ -78,12 +78,6 @@
                         android:text="なし"
                         app:srcCompat="@mipmap/ic_launcher" />
 
-                    <Switch
-                        android:id="@+id/date_time_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="#333333" />
                 </LinearLayout>
 
             </LinearLayout>

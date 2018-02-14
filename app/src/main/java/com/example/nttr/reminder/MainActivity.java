@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //SharedPreferenceにデータがあればリストに表示
-        //preNameでリスト項目に対応するアラーム情報を保存する？
+        //RealmのDBにリストデータがあれば表示
+        //DBにはタイトル、メモ、アラーム指定時刻などの情報がある
         final List<String> reminderList = new ArrayList<String>(){
             {
                 add("AA");
