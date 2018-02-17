@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //DBにはタイトル、メモ、アラーム指定時刻などの情報がある
         final List<String> reminderList = new ArrayList<String>(){
             {
-                add("AA");
+                add("タイトル");
                 add("BB");
                 add("CC");
             }
@@ -79,13 +79,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_add:
                 // ボタンをタップした際の処理を記述
                 Intent intent = new Intent(MainActivity.this, EditActivity.class);
-
-//                // 編集画面に渡すデータをセットし、表示
-//                Intent intent = new Intent(MainActivity.this, EditActivity.class);
-//                intent.putExtra("NAME", mList.get(position).get("filename"));//マップのfilenameキーに対応する値を渡している
-//                intent.putExtra("TITLE", mList.get(position).get("title"));
-//                intent.putExtra("CONTENT", mList.get(position).get("content"));
-
                 startActivity(intent);
                 break;
         }

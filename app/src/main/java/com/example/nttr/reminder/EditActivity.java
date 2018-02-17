@@ -172,7 +172,7 @@ public class EditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_del:
+            case R.id.action_save:
 
                 break;
             default:
