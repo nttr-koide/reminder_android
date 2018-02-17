@@ -39,10 +39,10 @@ public class EditActivity extends AppCompatActivity {
     TextView titleLabel;
     @BindView(R.id.title_text)
     EditText titleText;
-//    @BindView(R.id.notification_switch)
-//    Switch notificationSwitch;
-//    @BindView(R.id.notification_linearlayout)
-//    LinearLayout notificationLinearlayout;
+    @BindView(R.id.notification_switch)
+    Switch notificationSwitch;
+    @BindView(R.id.notification_linearlayout)
+    LinearLayout notificationLinearlayout;
     @BindView(R.id.date_time_label)
     TextView dateTimeLabel;
     @BindView(R.id.date_time_button)
@@ -51,24 +51,18 @@ public class EditActivity extends AppCompatActivity {
     LinearLayout dateTimeLinearlayout;
     @BindView(R.id.notification_sound_label)
     TextView notificationSoundLabel;
-    @BindView(R.id.notification_sound_text)
-    TextView notificationSoundText;
     @BindView(R.id.notification_sound_button)
     Button notificationSoundButton;
     @BindView(R.id.notification_sound_linearlayout)
     LinearLayout notificationSoundLinearlayout;
     @BindView(R.id.vibration_label)
     TextView vibrationLabel;
-    @BindView(R.id.vibration_text)
-    TextView vibrationText;
     @BindView(R.id.vibration_button)
     Button vibrationButton;
     @BindView(R.id.vibration_linearlayout)
     LinearLayout vibrationLinearlayout;
     @BindView(R.id.repetition_label)
     TextView repetitionLabel;
-    @BindView(R.id.repetition_text)
-    TextView repetitionText;
     @BindView(R.id.repetition_button)
     Button repetitionButton;
     @BindView(R.id.repetition_linearlayout)
@@ -188,7 +182,7 @@ public class EditActivity extends AppCompatActivity {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date(alarmTime);
             dateTimeButton.setText(df.format(date));
-//            notificationSwitch.setChecked(true);
+            notificationSwitch.setChecked(true);
         }
     }
 

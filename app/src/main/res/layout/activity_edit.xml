@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@drawable/background"
     tools:context="com.example.nttr.reminder.EditActivity">
 
     <LinearLayout
@@ -18,9 +19,7 @@
             android:id="@+id/title_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame_black"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/title_label"
@@ -53,19 +52,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:layout_marginTop="4dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/content_label"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="メモ"
                     android:textColor="#A52A2A"
@@ -73,8 +72,9 @@
 
                 <ImageView
                     android:id="@+id/content_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="4dp"
                     android:tint="#A52A2A"
                     android:tintMode="src_in"
                     app:srcCompat="@android:drawable/ic_menu_edit" />
@@ -91,13 +91,11 @@
                     android:id="@+id/content_text"
                     style="@style/TitleEditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="text"
                     android:maxLength="30"
-                    android:maxLines="1"
+                    android:maxLines="4"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textSize="24sp"
                     android:theme="@style/TitleEditTextStyle" />
@@ -105,34 +103,36 @@
 
         </LinearLayout>
 
-        <!--<LinearLayout-->
-        <!--android:id="@+id/notification_linearlayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:orientation="horizontal">-->
+        <LinearLayout
+        android:id="@+id/notification_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="right|center"-->
-        <!--android:orientation="horizontal">-->
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right|center"
+        android:orientation="horizontal">
 
-        <!--<Switch-->
-        <!--android:id="@+id/notification_switch"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1" />-->
-        <!--</LinearLayout>-->
+            <Switch
+                android:id="@+id/notification_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="通知設定"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-        <!--</LinearLayout>-->
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/date_time_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="left|center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingRight="4dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -152,7 +152,8 @@
                 <ImageView
                     android:id="@+id/date_time_image"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
                     android:tint="#008000"
                     android:tintMode="src_in"
                     app:srcCompat="@android:drawable/ic_menu_recent_history" />
@@ -174,7 +175,10 @@
                         android:id="@+id/date_time_button"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:text="なし"
+                        android:background="@color/transparent"
+                        android:text="なし >"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#a4000000"
                         app:srcCompat="@mipmap/ic_launcher" />
 
                 </LinearLayout>
@@ -187,19 +191,37 @@
             android:id="@+id/notification_sound_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/notification_sound_label"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center"
-                android:text="通知音" />
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:paddingRight="4dp">
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/notification_sound_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
+                    android:text="通知音"
+                    android:textColor="#FF69B4"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/notification_sound_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:tint="#FF69B4"
+                    android:tintMode="src_in"
+                    app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:orientation="horizontal">
@@ -210,18 +232,15 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/notification_sound_text"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:text="なし" />
-
                     <Button
                         android:id="@+id/notification_sound_button"
-                        android:layout_width="50dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:text="なし >"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#a4000000"
                         app:srcCompat="@mipmap/ic_launcher" />
-
 
                 </LinearLayout>
 
@@ -233,19 +252,37 @@
             android:id="@+id/vibration_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/vibration_label"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center"
-                android:text="振動" />
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:paddingRight="4dp">
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/vibration_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
+                    android:text="振動"
+                    android:textColor="#0000FF	"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/vibration_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:tint="#0000FF	"
+                    android:tintMode="src_in"
+                    app:srcCompat="@android:drawable/ic_menu_always_landscape_portrait" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:orientation="horizontal">
@@ -256,17 +293,16 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/vibration_text"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:text="なし" />
-
                     <Button
                         android:id="@+id/vibration_button"
-                        android:layout_width="50dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:text="なし >"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#a4000000"
                         app:srcCompat="@mipmap/ic_launcher" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -277,19 +313,37 @@
             android:id="@+id/repetition_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/repetition_label"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center"
-                android:text="繰り返し" />
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:paddingRight="4dp">
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/repetition_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
+                    android:text="リピート"
+                    android:textColor="#FFA500"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/repetition_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:tint="#FFA500"
+                    android:tintMode="src_in"
+                    app:srcCompat="@android:drawable/ic_popup_sync" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:orientation="horizontal">
@@ -300,23 +354,21 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/repetition_text"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:text="なし" />
-
                     <Button
                         android:id="@+id/repetition_button"
-                        android:layout_width="50dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:text="なし >"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#a4000000"
                         app:srcCompat="@mipmap/ic_launcher" />
+
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

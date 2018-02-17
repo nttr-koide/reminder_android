@@ -48,7 +48,7 @@ class CustomAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.editButton = convertView.findViewById(R.id.edit);
-            holder.textView = convertView.findViewById(R.id.text);
+            holder.textView = convertView.findViewById(R.id.title_text);
             holder.deleteButton = convertView.findViewById(R.id.delete);
             convertView.setTag(holder);
         } else {
