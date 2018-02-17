@@ -43,15 +43,19 @@ public class PlaySoundActivity extends AppCompatActivity {
                 stopService(new Intent(PlaySoundActivity.this, PlaySoundService.class));
                 PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
                 pref.delete(EditActivity.ALARM_TIME);
+                finish();
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        stopService(new Intent(PlaySoundActivity.this, PlaySoundService.class));
-        PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
-        pref.delete(EditActivity.ALARM_TIME);
+//        super.onBackPressed();
+//        stopService(new Intent(PlaySoundActivity.this, PlaySoundService.class));
+//        PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
+//        pref.delete(EditActivity.ALARM_TIME);
+//
+////        Intent intent = new Intent(PlaySoundActivity.this, MainActivity.class);
+////        startActivity(intent);
     }
 }

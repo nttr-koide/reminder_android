@@ -215,8 +215,11 @@ public class EditActivity extends AppCompatActivity {
                                 alarmCalendar.set(Calendar.MINUTE, minute);
                                 alarmCalendar.set(Calendar.SECOND, 0);
                                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                //Realmにdf.format(alarmCalendar.getTime()を保存
+
                                 dateTimeButton.setText(df.format(alarmCalendar.getTime()));
-                                register(alarmCalendar.getTimeInMillis());
+
+                                register(alarmCalendar.getTimeInMillis());///////追加したところ
 
                             }
                         }, hour, minute, true);
@@ -272,5 +275,83 @@ public class EditActivity extends AppCompatActivity {
 
 //    @Override
 //    public void onBackPressed() {
+//        finish();
+//    }
+
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        pref = new PreferenceUtil(this);
+//        setupViews();
+//        setListeners();
+//
+//        if(!notificationSwitch.isChecked()) {
+//            dateTimeLabel.setVisibility(View.GONE);
+//            dateTimeButton.setVisibility(View.GONE);
+//            dateTimeLinearlayout.setVisibility(View.GONE);
+//
+//            notificationSoundLabel.setVisibility(View.GONE);
+//            notificationSoundText.setVisibility(View.GONE);
+//            notificationSoundButton.setVisibility(View.GONE);
+//            notificationSoundLinearlayout.setVisibility(View.GONE);
+//
+//            vibrationLabel.setVisibility(View.GONE);
+//            vibrationText.setVisibility(View.GONE);
+//            vibrationButton.setVisibility(View.GONE);
+//            vibrationLinearlayout.setVisibility(View.GONE);
+//
+//            repetitionLabel.setVisibility(View.GONE);
+//            repetitionText.setVisibility(View.GONE);
+//            repetitionButton.setVisibility(View.GONE);
+//            repetitionLinearlayout.setVisibility(View.GONE);
+//        }
+//
+//
+//        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked) {
+//                    dateTimeLabel.setVisibility(View.VISIBLE);
+//                    dateTimeButton.setVisibility(View.VISIBLE);
+//                    dateTimeLinearlayout.setVisibility(View.VISIBLE);
+//
+//                    notificationSoundLabel.setVisibility(View.VISIBLE);
+//                    notificationSoundText.setVisibility(View.VISIBLE);
+//                    notificationSoundButton.setVisibility(View.VISIBLE);
+//                    notificationSoundLinearlayout.setVisibility(View.VISIBLE);
+//
+//                    vibrationLabel.setVisibility(View.VISIBLE);
+//                    vibrationText.setVisibility(View.VISIBLE);
+//                    vibrationButton.setVisibility(View.VISIBLE);
+//                    vibrationLinearlayout.setVisibility(View.VISIBLE);
+//
+//                    repetitionLabel.setVisibility(View.VISIBLE);
+//                    repetitionText.setVisibility(View.VISIBLE);
+//                    repetitionButton.setVisibility(View.VISIBLE);
+//                    repetitionLinearlayout.setVisibility(View.VISIBLE);
+//                }
+//                else{
+//                    dateTimeLabel.setVisibility(View.GONE);
+//                    dateTimeButton.setVisibility(View.GONE);
+//                    dateTimeLinearlayout.setVisibility(View.GONE);
+//
+//                    notificationSoundLabel.setVisibility(View.GONE);
+//                    notificationSoundText.setVisibility(View.GONE);
+//                    notificationSoundButton.setVisibility(View.GONE);
+//                    notificationSoundLinearlayout.setVisibility(View.GONE);
+//
+//                    vibrationLabel.setVisibility(View.GONE);
+//                    vibrationText.setVisibility(View.GONE);
+//                    vibrationButton.setVisibility(View.GONE);
+//                    vibrationLinearlayout.setVisibility(View.GONE);
+//
+//                    repetitionLabel.setVisibility(View.GONE);
+//                    repetitionText.setVisibility(View.GONE);
+//                    repetitionButton.setVisibility(View.GONE);
+//                    repetitionLinearlayout.setVisibility(View.GONE);
+//                }
+//            }
+//        });
 //    }
 }

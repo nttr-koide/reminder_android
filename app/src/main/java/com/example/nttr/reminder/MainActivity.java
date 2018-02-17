@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    //新しいリマインダーリストとその情報を編集画面で作成
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -90,8 +92,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public void onBackPressed() {
-//    }
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
 
