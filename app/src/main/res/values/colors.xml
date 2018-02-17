@@ -2,5 +2,12 @@
 <resources>
     <color name="colorPrimary">#333333</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#008000</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="purple">#800080</color>
+    <color name="shadow_purple">#2a800080</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="black">#000000</color>
+    <color name="shadow_black">#2a000000</color>
 </resources>

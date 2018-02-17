@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         final List<String> reminderList = new ArrayList<String>(){
             {
                 add("タイトル");
-                add("BB");
+                add("ああああああああああああああああああ");
                 add("CC");
             }
         };

@@ -10,13 +10,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp">
 
         <LinearLayout
+            android:id="@+id/title_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/title_frame"
-            android:orientation="horizontal">
+            android:background="@drawable/frame_black"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/title_label"
@@ -29,53 +33,133 @@
 
             <EditText
                 android:id="@+id/title_text"
+                style="@style/TitleEditTextStyle"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:hint="Title"
-                android:maxLines="1"
-                android:maxLength="12"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="#333333" />
+                android:inputType="text"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="24sp"
+                android:theme="@style/TitleEditTextStyle" />
+
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/notification_linearlayout"
+            android:id="@+id/content_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <Switch
-                android:id="@+id/notification_switch"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="通知設定"
-                android:textColor="#333333" />
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/content_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="メモ"
+                    android:textColor="#A52A2A"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/content_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="#A52A2A"
+                    android:tintMode="src_in"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/content_text"
+                    style="@style/TitleEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textSize="24sp"
+                    android:theme="@style/TitleEditTextStyle" />
+            </LinearLayout>
+
         </LinearLayout>
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/notification_linearlayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="right|center"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Switch-->
+        <!--android:id="@+id/notification_switch"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1" />-->
+        <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/date_time_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center"
+            android:gravity="left|center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/date_time_label"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center"
-                android:text="指定日時" />
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/date_time_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
+                    android:text="指定日時"
+                    android:textColor="#008000"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/date_time_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="#008000"
+                    android:tintMode="src_in"
+                    app:srcCompat="@android:drawable/ic_menu_recent_history" />
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:orientation="horizontal">
@@ -232,22 +316,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/content_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="メモ" />
-
-        <EditText
-            android:id="@+id/content_text"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:ems="10"
-            android:gravity="top|left"
-            android:inputType="textPersonName"
-            android:textColor="#333333" />
 
 
     </LinearLayout>
