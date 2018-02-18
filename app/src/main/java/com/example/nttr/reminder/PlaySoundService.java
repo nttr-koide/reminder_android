@@ -55,7 +55,10 @@ public class PlaySoundService extends Service implements MediaPlayer.OnCompletio
     private void play() {
         try {
             mediaPlayer.reset();
+
+            //音を選択
             mediaPlayer.setDataSource(this, getVideoUri(R.raw.sample));
+
             mediaPlayer.setVolume(volume, volume);
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
             mediaPlayer.setOnCompletionListener(this);

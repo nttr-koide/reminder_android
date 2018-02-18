@@ -52,21 +52,21 @@
 
         <Button
             android:id="@+id/edit"
-            android:layout_width="42dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="@color/transparent"
             android:text="編集"
-            android:textColor="#a40000CD"
+            android:textColor="#880000CD"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/delete"
-            android:layout_width="42dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="@color/transparent"
             android:backgroundTintMode="src_atop"
             android:text="削除"
-            android:textColor="#a4FF0000"
+            android:textColor="#88FF0000"
             android:textSize="18sp" />
 
     </LinearLayout>

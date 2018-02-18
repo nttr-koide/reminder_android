@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, reminderList.get(position) + "の削除ボタンが押されました", Toast.LENGTH_SHORT).show();
                             break;
                     }
+//                    ListView listView = (ListView)parent;
+//                    String item = (String)listView.getItemAtPosition(position);
+//                    Intent intent = new Intent(MainActivity.this, EditActivity.class);
+//                    //put
+//                    startActivity(intent);
                 }
             });
         }
