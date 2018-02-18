@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#88A0522D</color>
+    <color name="colorPrimary">#333333</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#9932CC</color>
 
@@ -11,3 +11,4 @@
     <color name="black">#000000</color>
     <color name="shadow_black">#2a000000</color>
 </resources>
+    <!--a4A0522D-->

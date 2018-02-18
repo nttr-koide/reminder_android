@@ -162,6 +162,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="通知設定"
+
                     android:textColor="#9932CC"
                     android:textSize="20sp" />
             </LinearLayout>
