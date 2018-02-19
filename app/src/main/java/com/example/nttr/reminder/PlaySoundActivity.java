@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.example.nttr.reminder.model.ReminderObjectDao;
 import com.example.nttr.reminder.util.PreferenceUtil;
 
 import butterknife.BindView;
@@ -41,8 +42,8 @@ public class PlaySoundActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 stopService(new Intent(PlaySoundActivity.this, PlaySoundService.class));
-                PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
-                pref.delete(EditActivity.ALARM_TIME);
+//                PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
+//                pref.delete(EditActivity.ALARM_TIME);
                 finish();
             }
         });
@@ -52,8 +53,14 @@ public class PlaySoundActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         stopService(new Intent(PlaySoundActivity.this, PlaySoundService.class));
-        PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
-        pref.delete(EditActivity.ALARM_TIME);
+//        PreferenceUtil pref = new PreferenceUtil(PlaySoundActivity.this);
+//        pref.delete(EditActivity.ALARM_TIME);
         finish();
     }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        ReminderObjectDao.remove(reminderList.get(position).getObject().getReminderId());
+//    }
 }

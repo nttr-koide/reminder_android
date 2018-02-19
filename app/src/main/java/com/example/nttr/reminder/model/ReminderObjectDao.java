@@ -116,7 +116,7 @@ public class ReminderObjectDao {
      *
      * @return 次のID
      */
-    private static int getNextId() {
+    public static int getNextId() {
         try (Realm realm = Realm.getDefaultInstance()) {
             RealmResults<ReminderObject> results = realm.where(ReminderObject.class).findAll();
             if (results.isEmpty()) {

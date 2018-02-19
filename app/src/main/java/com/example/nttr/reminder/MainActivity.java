@@ -42,20 +42,15 @@ public class MainActivity extends AppCompatActivity {
 //        ReminderObjectDao.add(dataObj);
         //テストコード end
 
-        //RealmのDBにリストデータがあれば表示
-        //DBにはタイトル、メモ、アラーム指定時刻などの情報がある
-//        final List<String> reminderList = new ArrayList<String>(){
-//            {
-//                add("タイトル");
-//                add("ああああああああああああああああああ");
-//                add("CC");
-//            }
-//        };
         final List<ReminderListItem> reminderList = new ArrayList<>();
         List<ReminderObject> records = ReminderObjectDao.getRecords();
+
         for (ReminderObject obj : records) {
-            reminderList.add(new ReminderListItem(obj));
+//            if(ReminderObjectDao.getRecord(0).getTitleName() != "") {
+                reminderList.add(new ReminderListItem(obj));
+//            }
         }
+
         CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.row_item, reminderList);
         ListView listView = (ListView) findViewById(R.id.listView);
         if(reminderList != null) {
@@ -77,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.delete:
                             Toast.makeText(MainActivity.this, reminderList.get(position) + "の削除ボタンが押されました", Toast.LENGTH_SHORT).show();
                             ReminderObjectDao.remove(reminderList.get(position).getObject().getReminderId());
+                            startActivity(new Intent(MainActivity.this, MainActivity.class));
                             break;
                     }
 //                    ListView listView = (ListView)parent;
@@ -96,14 +92,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //新しいリマインダーリストとその情報を編集画面で作成
+//    新しいリマインダーリストとを追加しようと編集画面へ遷移
+//    追加しない可能性もあるからadd(obj)はしない getNextId()でIdを仮で用意するだけ
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
                 // ボタンをタップした際の処理を記述
                 Intent intent = new Intent(MainActivity.this, EditActivity.class);
-//                intent.putStExtra("解説リスト", commentaryList);
+                ReminderObject dataObj = new ReminderObject();
+                //レコード追加
+                ReminderObjectDao.update(dataObj);
+//                ReminderObjectDao.add(dataObj);
+                intent.putExtra("REMINDERID", dataObj.getReminderId());
+//                intent.putExtra("REMINDERID", ReminderObjectDao.getNextId());
                 startActivity(intent);
                 break;
         }
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+//        finish();
     }
 }
 
