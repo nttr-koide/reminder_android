@@ -81,6 +81,8 @@ public class EditActivity extends AppCompatActivity {
 
     Calendar alarmCalendar = Calendar.getInstance();
 
+    int reminderId;
+
     public static final String ALARM_TIME = "alarm_time";
 
     @Override
@@ -92,7 +94,7 @@ public class EditActivity extends AppCompatActivity {
 //        pref = new PreferenceUtil(this);
 
         Intent intent = getIntent();
-        int reminderId = intent.getIntExtra("REMINDERID", 0);
+        reminderId = intent.getIntExtra("REMINDERID", 0);
 
 
         setupViews();
@@ -169,7 +171,10 @@ public class EditActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_save:
 //                Log.d("ああああああああああ", String.valueOf(dateTimeButton.getText()));
-                register(alarmCalendar.getTimeInMillis());
+//                if(alarmCalendar.getTimeInMillis() == dateTimeButton.getTextAlignment()){
+                    register(alarmCalendar.getTimeInMillis());
+//                }
+//                register(alarmCalendar.getTimeInMillis());
                 Intent intent = new Intent(EditActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -239,7 +244,7 @@ public class EditActivity extends AppCompatActivity {
             alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, pendingIntent);
         }
         // DBに保存
-        saveReminderData();
+        saveReminderData(reminderId);
     }
 
 //    // 解除
@@ -258,7 +263,7 @@ public class EditActivity extends AppCompatActivity {
         return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
-    private void saveReminderData() {
+    private void saveReminderData(int reminderId) {
         //データ登録
         SpannableStringBuilder sb = (SpannableStringBuilder)titleText.getText();
         String strTitleText = sb.toString();
@@ -269,6 +274,8 @@ public class EditActivity extends AppCompatActivity {
         dataObj.setTitleName(strTitleText);
 
         dataObj.setDateAndTime(strDateTimeButtonText);
+
+        dataObj.setReminderId(reminderId);
 //        dataObj.setNotification("");
 //        dataObj.setNotificationSound("");
 //        dataObj.setRepeatInterval("");

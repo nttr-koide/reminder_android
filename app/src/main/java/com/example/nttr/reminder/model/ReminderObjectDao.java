@@ -54,7 +54,7 @@ public class ReminderObjectDao {
      * @return レコード
      * @throws RuntimeException 該当レコードが存在しない場合
      */
-    public static ReminderObject All(int id) {
+    public static ReminderObject getRecord(int id) {
         try (Realm realm = Realm.getDefaultInstance()) {
             ReminderObject result = realm.where(ReminderObject.class)
                     .equalTo("reminderId", id)
@@ -73,6 +73,19 @@ public class ReminderObjectDao {
      */
     public static void add(ReminderObject obj) {
         obj.setReminderId(getNextId());
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.beginTransaction();
+            realm.copyToRealmOrUpdate(obj);
+            realm.commitTransaction();
+        }
+    }
+
+    /**
+     * レコードの追加
+     *
+     * @param obj レコード
+     */
+    public static void update(ReminderObject obj) {
         try (Realm realm = Realm.getDefaultInstance()) {
             realm.beginTransaction();
             realm.copyToRealmOrUpdate(obj);
