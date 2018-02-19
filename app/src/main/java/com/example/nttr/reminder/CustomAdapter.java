@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.nttr.reminder.entity.ReminderListItem;
+
 import java.util.List;
 
 /**
@@ -26,7 +28,7 @@ import java.util.List;
 class CustomAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private int resourcedId;
-    private List<String> items;
+    private List<ReminderListItem> items;
 
     static class ViewHolder {
         Button editButton;
@@ -34,7 +36,7 @@ class CustomAdapter extends BaseAdapter {
         Button deleteButton;
     }
 
-    CustomAdapter(Context context, int resourcedId, List<String> items) {
+    CustomAdapter(Context context, int resourcedId, List<ReminderListItem> items) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.resourcedId = resourcedId;
         this.items = items;
@@ -55,7 +57,7 @@ class CustomAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.textView.setText(items.get(position));
+        holder.textView.setText(items.get(position).getObject().getTitleName());
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override

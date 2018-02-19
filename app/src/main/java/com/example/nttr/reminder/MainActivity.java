@@ -20,6 +20,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.nttr.reminder.entity.ReminderListItem;
+import com.example.nttr.reminder.entity.ReminderObject;
+import com.example.nttr.reminder.model.ReminderObjectDao;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,19 +35,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //テストコード start
+        //データ登録
+//        ReminderObject dataObj = new ReminderObject();
+//        dataObj.setTitleName("111");
+//        ReminderObjectDao.add(dataObj);
+        //テストコード end
+
         //RealmのDBにリストデータがあれば表示
         //DBにはタイトル、メモ、アラーム指定時刻などの情報がある
-        final List<String> reminderList = new ArrayList<String>(){
-            {
-                add("タイトル");
-                add("ああああああああああああああああああ");
-                add("CC");
-            }
-        };
-
+//        final List<String> reminderList = new ArrayList<String>(){
+//            {
+//                add("タイトル");
+//                add("ああああああああああああああああああ");
+//                add("CC");
+//            }
+//        };
+        final List<ReminderListItem> reminderList = new ArrayList<>();
+        List<ReminderObject> records = ReminderObjectDao.getRecords();
+        for (ReminderObject obj : records) {
+            reminderList.add(new ReminderListItem(obj));
+        }
+        CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.row_item, reminderList);
         ListView listView = (ListView) findViewById(R.id.listView);
         if(reminderList != null) {
-            CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.row_item, reminderList);
+//            CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.row_item, reminderList);
             listView.setAdapter(adapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,10 +70,12 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, reminderList.get(position) + "の編集ボタンが押されました", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, EditActivity.class);
                             //put
+                            intent.putExtra("REMINDERID", reminderList.get(position).getObject().getReminderId());
                             startActivity(intent);
                             break;
                         case R.id.delete:
                             Toast.makeText(MainActivity.this, reminderList.get(position) + "の削除ボタンが押されました", Toast.LENGTH_SHORT).show();
+                            ReminderObjectDao.remove(reminderList.get(position).getObject().getReminderId());
                             break;
                     }
 //                    ListView listView = (ListView)parent;

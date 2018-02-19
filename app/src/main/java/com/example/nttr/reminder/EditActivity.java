@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.nttr.reminder.entity.ReminderListItem;
+import com.example.nttr.reminder.entity.ReminderObject;
+import com.example.nttr.reminder.model.ReminderObjectDao;
 import com.example.nttr.reminder.util.PreferenceUtil;
 
 import java.text.DateFormat;
@@ -158,7 +162,7 @@ public class EditActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-
+                reminderList.add(new ReminderListItem(obj));
                 break;
             default:
                 break;
@@ -240,6 +244,8 @@ public class EditActivity extends AppCompatActivity {
         }
         // 保存
         pref.setLong(ALARM_TIME, alarmTimeMillis);
+        // DBに保存
+        saveReminderData();
     }
 
     // 解除
@@ -256,6 +262,23 @@ public class EditActivity extends AppCompatActivity {
         // 第二引数が同じで第四引数にFLAG_CANCEL_CURRENTがセットされている場合、2回以上呼び出されたときは
         // あとからのものが上書きされる
         return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
+    private void saveReminderData() {
+        //データ登録
+        SpannableStringBuilder sb = (SpannableStringBuilder)titleText.getText();
+        String strTitleText = sb.toString();
+
+        String strDateTimeButtonText = sb.toString();
+
+        ReminderObject dataObj = new ReminderObject();
+        dataObj.setTitleName(strTitleText);
+        dataObj.setDateAndTime(strDateTimeButtonText);
+//        dataObj.setNotification("");
+//        dataObj.setNotificationSound("");
+//        dataObj.setRepeatInterval("");
+//        dataObj.setVibration("");
+        ReminderObjectDao.add(dataObj);
     }
 
 //    @Override

@@ -26,7 +26,6 @@ public class PlaySoundService extends Service implements MediaPlayer.OnCompletio
 
     public PlaySoundService() {
     }
-
     @Override
     public void onCreate() {
         super.onCreate();
