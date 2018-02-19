@@ -22,7 +22,7 @@ import java.io.IOException;
 public class PlaySoundService extends Service implements MediaPlayer.OnCompletionListener{
 
     MediaPlayer mediaPlayer;
-    float volume = 0.3f;
+    float volume = 0.1f;//////
 
     public PlaySoundService() {
     }

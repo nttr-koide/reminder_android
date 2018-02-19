@@ -10,7 +10,7 @@
     <string name="hint_content">内容</string>
 
     <!-- edit.xml -->
-    <string name="action_delete">削除</string>
+    <string name="action_save">保存</string>
 
     <string name="editactivity_title">編集</string>
 

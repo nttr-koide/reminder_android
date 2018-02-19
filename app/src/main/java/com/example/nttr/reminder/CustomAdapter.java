@@ -32,7 +32,8 @@ class CustomAdapter extends BaseAdapter {
 
     static class ViewHolder {
         Button editButton;
-        TextView textView;
+        TextView titleText;
+        TextView dateTimeText;
         Button deleteButton;
     }
 
@@ -50,14 +51,16 @@ class CustomAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.editButton = convertView.findViewById(R.id.edit);
-            holder.textView = convertView.findViewById(R.id.title_text);
+            holder.titleText = convertView.findViewById(R.id.title_text);
+            holder.dateTimeText = convertView.findViewById(R.id.date_time_text);
             holder.deleteButton = convertView.findViewById(R.id.delete);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.textView.setText(items.get(position).getObject().getTitleName());
+        holder.titleText.setText(items.get(position).getObject().getTitleName());
+        holder.dateTimeText.setText(items.get(position).getObject().getDateAndTime());
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override

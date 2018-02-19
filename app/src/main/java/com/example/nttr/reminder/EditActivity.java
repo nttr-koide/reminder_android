@@ -20,6 +20,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -88,7 +89,12 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         ButterKnife.bind(this);
 
-        pref = new PreferenceUtil(this);
+//        pref = new PreferenceUtil(this);
+
+        Intent intent = getIntent();
+        int reminderId = intent.getIntExtra("REMINDERID", 0);
+
+
         setupViews();
         setListeners();
 
@@ -162,7 +168,10 @@ public class EditActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                reminderList.add(new ReminderListItem(obj));
+//                Log.d("ああああああああああ", String.valueOf(dateTimeButton.getText()));
+                register(alarmCalendar.getTimeInMillis());
+                Intent intent = new Intent(EditActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -172,13 +181,14 @@ public class EditActivity extends AppCompatActivity {
 
     private void setupViews() {
 
-        long alarmTime = pref.getLong(ALARM_TIME);
-        if (alarmTime != 0) {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = new Date(alarmTime);
-            dateTimeButton.setText(df.format(date));
-            notificationSwitch.setChecked(true);
-        }
+//        long alarmTime = pref.getLong(ALARM_TIME);
+//        long alarmTime = intent.get.getLong(ALARM_TIME);
+//        if (alarmTime != 0) {
+//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date date = new Date(alarmTime);
+//            dateTimeButton.setText(df.format(date));
+//            notificationSwitch.setChecked(true);
+//        }
     }
 
     private void setListeners() {
@@ -207,9 +217,6 @@ public class EditActivity extends AppCompatActivity {
                                 //Realmにdf.format(alarmCalendar.getTime()を保存
 
                                 dateTimeButton.setText(df.format(alarmCalendar.getTime()));
-
-                                register(alarmCalendar.getTimeInMillis());///////追加したところ
-
                             }
                         }, hour, minute, true);
                         timePickerDialog.show();
@@ -218,17 +225,6 @@ public class EditActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
-//        dateTimeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//                if (isChecked) {
-//                    register(alarmCalendar.getTimeInMillis());
-//                } else {
-//                    unregister();
-//                }
-//            }
-//        });
     }
 
     // 登録
@@ -242,18 +238,16 @@ public class EditActivity extends AppCompatActivity {
         } else {
             alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, pendingIntent);
         }
-        // 保存
-        pref.setLong(ALARM_TIME, alarmTimeMillis);
         // DBに保存
         saveReminderData();
     }
 
-    // 解除
-    private void unregister() {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(getPendingIntent());
-        pref.delete(ALARM_TIME);
-    }
+//    // 解除
+//    private void unregister() {
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.cancel(getPendingIntent());
+//        pref.delete(ALARM_TIME);
+//    }
 
     private PendingIntent getPendingIntent() {
         Intent intent = new Intent(this, AlarmReceiver.class);
@@ -269,10 +263,11 @@ public class EditActivity extends AppCompatActivity {
         SpannableStringBuilder sb = (SpannableStringBuilder)titleText.getText();
         String strTitleText = sb.toString();
 
-        String strDateTimeButtonText = sb.toString();
+        String strDateTimeButtonText = String.valueOf(dateTimeButton.getText());
 
         ReminderObject dataObj = new ReminderObject();
         dataObj.setTitleName(strTitleText);
+
         dataObj.setDateAndTime(strDateTimeButtonText);
 //        dataObj.setNotification("");
 //        dataObj.setNotificationSound("");

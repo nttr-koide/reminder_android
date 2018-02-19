@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, EditActivity.class);
                             //put
                             intent.putExtra("REMINDERID", reminderList.get(position).getObject().getReminderId());
+//                            intent.putExtra("REMINDERID", reminderList.get(position).getObject());
                             startActivity(intent);
                             break;
                         case R.id.delete:
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_add:
                 // ボタンをタップした際の処理を記述
                 Intent intent = new Intent(MainActivity.this, EditActivity.class);
+//                intent.putStExtra("解説リスト", commentaryList);
                 startActivity(intent);
                 break;
         }
