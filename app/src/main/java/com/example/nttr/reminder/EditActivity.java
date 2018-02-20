@@ -110,7 +110,7 @@ public class EditActivity extends AppCompatActivity {
 
         setupViews();
         setListeners();
-        
+
         contentLinearlayout.setVisibility(View.GONE);
 
         notificationLinearlayout.setVisibility(View.GONE);
@@ -317,7 +317,7 @@ public class EditActivity extends AppCompatActivity {
         // 複数のアラームを登録する場合はPendingIntent.getBroadcastの第二引数を変更する
         // 第二引数が同じで第四引数にFLAG_CANCEL_CURRENTがセットされている場合、2回以上呼び出されたときは
         // あとからのものが上書きされる
-        return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        return PendingIntent.getBroadcast(this, ReminderObjectDao.getRecord(reminderId).getReminderId(), intent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     private void saveReminderData(int reminderId) {
