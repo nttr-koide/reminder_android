@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch (view.getId()) {
                         case R.id.edit:
-                            Toast.makeText(MainActivity.this, reminderList.get(position) + "の編集ボタンが押されました", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MainActivity.this, reminderList.get(position) + "の編集ボタンが押されました", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, EditActivity.class);
                             //put
                             intent.putExtra("REMINDERID", reminderList.get(position).getObject().getReminderId());
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                             break;
                         case R.id.delete:
-                            Toast.makeText(MainActivity.this, reminderList.get(position) + "の削除ボタンが押されました", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MainActivity.this, reminderList.get(position) + "の削除ボタンが押されました", Toast.LENGTH_SHORT).show();
                             ReminderObjectDao.remove(reminderList.get(position).getObject().getReminderId());
 
                             //
