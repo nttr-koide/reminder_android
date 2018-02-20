@@ -80,7 +80,7 @@ public class EditActivity extends AppCompatActivity {
 
     PreferenceUtil pref;
 
-    Calendar alarmCalendar = Calendar.getInstance();
+    Calendar alarmCalendar;
 
     int reminderId;
 
@@ -96,8 +96,6 @@ public class EditActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         reminderId = intent.getIntExtra("REMINDERID", 0);
-
-//        dateTimeButton.setText(ReminderObjectDao.getRecord(reminderId).getDateAndTime());
 
         setupViews();
         setListeners();
@@ -172,20 +170,38 @@ public class EditActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-//                if(String.valueOf(titleText.getText()) == ""){
-//                    Toast.makeText(EditActivity.this, "タイトルを入力してください", Toast.LENGTH_SHORT).show();
-//                    break;
-//                }
+                //タイトルは入力必須
+                if(String.valueOf(titleText.getText()).equals("")){
+                    Toast.makeText(EditActivity.this, "タイトルを入力してください", Toast.LENGTH_SHORT).show();
+                    break;
+                }
 
+                if(alarmCalendar == null){
+                    Toast.makeText(EditActivity.this, "日付を指定してください", Toast.LENGTH_SHORT).show();
+                    break;
+                }
 
-//                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                ReminderObjectDao.getRecord(reminderId).setDateAndTime(df.format(alarmCalendar.getTime()));
-                //保存ボタン押下で、DBにセットされている指定日時を登録する
-//                if(ReminderObjectDao.getRecord(reminderId).getDateAndTime() != null){
-                    register(alarmCalendar.getTimeInMillis());
-//                }
-//                register(alarmCalendar.getTime());
-//                register(alarmCalendar.getTime());
+                if(!ReminderObjectDao.getRecord(reminderId).getDateAndTime().equals("") ){
+//                    if(alarmCalendar == null){
+//                        //セットされている時刻を再度セット
+////                        register(Long.parseLong(ReminderObjectDao.getRecord(reminderId).getDateAndTime()));
+////                        Toast.makeText(EditActivity.this, "", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else{
+                        register(alarmCalendar.getTimeInMillis());//alarmCalendar.getTimeInMillis()は、alarmCalendarにセットした時刻を取得
+//                    }
+//                    if(!ReminderObjectDao.getRecord(reminderId).getTitleName().equals(String.valueOf(titleText.getText()))){
+//
+//                    }
+                }
+                else{
+                    if(reminderId == 0){ //Id=0に対応するオブジェクトはないため上のifを抜けてしまう（MainActivityではupDateのみ行い、一時的にId0を送っているため）
+                        register(alarmCalendar.getTimeInMillis());//時刻は入力されていないと
+                    }
+                    else{
+                        saveReminderData(reminderId);
+                    }
+                }
                 Intent intent = new Intent(EditActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -201,7 +217,11 @@ public class EditActivity extends AppCompatActivity {
 //        if (alarmTime != 0) {
 //            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            Date date = new Date(alarmTime);
-        if(ReminderObjectDao.getRecord(reminderId).getDateAndTime() != null) {
+
+        if(!ReminderObjectDao.getRecord(reminderId).getTitleName().equals("")) {
+            titleText.setText(ReminderObjectDao.getRecord(reminderId).getTitleName());
+        }
+        if(!ReminderObjectDao.getRecord(reminderId).getDateAndTime().equals("")) {
             dateTimeButton.setText(ReminderObjectDao.getRecord(reminderId).getDateAndTime());
             notificationSwitch.setChecked(true);
         }
@@ -224,6 +244,7 @@ public class EditActivity extends AppCompatActivity {
                         TimePickerDialog timePickerDialog = new TimePickerDialog(EditActivity.this, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                alarmCalendar = Calendar.getInstance();
                                 alarmCalendar.set(Calendar.YEAR, y);
                                 alarmCalendar.set(Calendar.MONTH, m);
                                 alarmCalendar.set(Calendar.DAY_OF_MONTH, d);
@@ -231,10 +252,9 @@ public class EditActivity extends AppCompatActivity {
                                 alarmCalendar.set(Calendar.MINUTE, minute);
                                 alarmCalendar.set(Calendar.SECOND, 0);
                                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                //Realmにdf.format(alarmCalendar.getTime()を保存
-//                                ReminderObjectDao.getRecord(reminderId).setDateAndTime(df.format(alarmCalendar.getTime()));
-//                                dateTimeButton.setText(df.format(ReminderObjectDao.getRecord(reminderId).getDateAndTime()));
                                 dateTimeButton.setText(df.format(alarmCalendar.getTime()));
+                                //Realmにdf.format(alarmCalendar.getTime()を保存
+                                ReminderObjectDao.getRecord(reminderId).setDateAndTime(String.valueOf(dateTimeButton.getText()));
                             }
                         }, hour, minute, true);
                         timePickerDialog.show();
@@ -257,12 +277,7 @@ public class EditActivity extends AppCompatActivity {
             alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, pendingIntent);
         }
         // DBに保存
-//        if(reminderId == 0){
-////            saveReminderData(ReminderObjectDao.getNextId());
-//        }
-//        else{
             saveReminderData(reminderId);
-//        }
     }
 
 //    // 解除
@@ -274,7 +289,8 @@ public class EditActivity extends AppCompatActivity {
 
     private PendingIntent getPendingIntent() {
         Intent intent = new Intent(this, AlarmReceiver.class);
-        intent.setClass(this, AlarmReceiver.class);
+//        intent.setClass(this, AlarmReceiver.class);
+        intent.setType(String.valueOf(ReminderObjectDao.getRecord(reminderId).getReminderId()));
         // 複数のアラームを登録する場合はPendingIntent.getBroadcastの第二引数を変更する
         // 第二引数が同じで第四引数にFLAG_CANCEL_CURRENTがセットされている場合、2回以上呼び出されたときは
         // あとからのものが上書きされる
@@ -285,29 +301,41 @@ public class EditActivity extends AppCompatActivity {
         //データ登録
         SpannableStringBuilder sb = (SpannableStringBuilder)titleText.getText();
         String strTitleText = sb.toString();
+        String strDateTimeButtonText;
 
-//        String strDateTimeButtonText = String.valueOf(dateTimeButton.getText());
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //Realmにdf.format(alarmCalendar.getTime()を保存
-//        ReminderObjectDao.getRecord(reminderId).setDateAndTime(String.valueOf(dateTimeButton.getText()));
-        String strDateTimeButtonText = String.valueOf(dateTimeButton.getText());
-//        String strDateTimeButtonText = ReminderObjectDao.getRecord(reminderId).getDateAndTime();
+        if(!dateTimeButton.getText().equals("なし >")){
+            strDateTimeButtonText = String.valueOf(dateTimeButton.getText());
+        }
+        else{
+            strDateTimeButtonText = "";
+        }
 
-        ReminderObject dataObj = new ReminderObject();
-        dataObj.setTitleName(strTitleText);
-        dataObj.setDateAndTime(strDateTimeButtonText);
-
-        dataObj.setReminderId(reminderId);
+        if(reminderId == 0){
+            ReminderObject dataObj = new ReminderObject();
+            dataObj.setTitleName(strTitleText);
+            dataObj.setDateAndTime(strDateTimeButtonText);
+            dataObj.setReminderId(reminderId);///??
+            ReminderObjectDao.add(dataObj);
+        }
+        else{
+            ReminderObject dataObj = new ReminderObject();
+            dataObj.setTitleName(strTitleText);
+            dataObj.setDateAndTime(strDateTimeButtonText);
+            dataObj.setReminderId(reminderId);///??
+            ReminderObjectDao.update(dataObj);
+//            ReminderObjectDao.getRecord(reminderId).setTitleName(strTitleText);
+//            ReminderObjectDao.getRecord(reminderId).setDateAndTime(strDateTimeButtonText);
+        }
 //        dataObj.setNotification("");
 //        dataObj.setNotificationSound("");
 //        dataObj.setRepeatInterval("");
 //        dataObj.setVibration("");
-        ReminderObjectDao.add(dataObj);
+
     }
 
-    @Override
-    public void onBackPressed() {
-//        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+////        finish();
+//    }
 
 }

@@ -8,6 +8,9 @@
 
 package com.example.nttr.reminder;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,9 +49,14 @@ public class MainActivity extends AppCompatActivity {
         List<ReminderObject> records = ReminderObjectDao.getRecords();
 
         for (ReminderObject obj : records) {
-//            if(ReminderObjectDao.getRecord(0).getTitleName() != "") {
+            if(obj.getTitleName().equals("")) {
+                ReminderObjectDao.remove(obj.getReminderId());
+//                ReminderObjectDao.getRecord(obj.getReminderId());
+            }
+            else{
                 reminderList.add(new ReminderListItem(obj));
-//            }
+            }
+
         }
 
         CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.row_item, reminderList);
@@ -72,14 +80,22 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.delete:
                             Toast.makeText(MainActivity.this, reminderList.get(position) + "の削除ボタンが押されました", Toast.LENGTH_SHORT).show();
                             ReminderObjectDao.remove(reminderList.get(position).getObject().getReminderId());
+
+                            //
+//                            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//
+//                            intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+//                            intent.setType(String.valueOf(reminderList.get(position).getObject().getReminderId()));    // このsetTypeが重要
+//
+//                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+//
+//                            pendingIntent.cancel();
+//                            alarmManager.cancel(pendingIntent);
+                            //
+
                             startActivity(new Intent(MainActivity.this, MainActivity.class));
                             break;
                     }
-//                    ListView listView = (ListView)parent;
-//                    String item = (String)listView.getItemAtPosition(position);
-//                    Intent intent = new Intent(MainActivity.this, EditActivity.class);
-//                    //put
-//                    startActivity(intent);
                 }
             });
         }
@@ -104,17 +120,12 @@ public class MainActivity extends AppCompatActivity {
                 //レコード追加
                 ReminderObjectDao.update(dataObj);
 //                ReminderObjectDao.add(dataObj);
-                intent.putExtra("REMINDERID", dataObj.getReminderId());
+                intent.putExtra("REMINDERID", dataObj.getReminderId());//dataObjのReminderId初期値0を送る
 //                intent.putExtra("REMINDERID", ReminderObjectDao.getNextId());
                 startActivity(intent);
                 break;
         }
         return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-//        finish();
     }
 }
 

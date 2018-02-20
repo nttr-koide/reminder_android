@@ -21,13 +21,22 @@ public class ReminderObject extends RealmObject {
     @PrimaryKey
     private int reminderId = 0;
     @NonNull
-    private String titleName = null;
-    private String notification = null;
-    private String dateAndTime = null;
-    private String notificationSound = null;
-    private String vibration = null;
-    private String repeatInterval = null;
-    private String content = null;
+    private String titleName = "";
+    private String notification = "";
+    private String dateAndTime = "";
+    private String notificationSound = "";
+    private String vibration = "";
+    private String repeatInterval = "";
+    private String content = "";
+//    private String alarmKey = "";
+//
+//    public String getAlarmKey() {
+//        return alarmKey;
+//    }
+//
+//    public void setAlarmKey(String alarmKey) {
+//        this.alarmKey = alarmKey;
+//    }
 
     public int getReminderId() {
         return reminderId;
