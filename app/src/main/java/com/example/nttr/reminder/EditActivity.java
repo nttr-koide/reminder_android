@@ -111,7 +111,7 @@ public class EditActivity extends AppCompatActivity {
         setupViews();
         setListeners();
 
-        contentLinearlayout.setVisibility(View.GONE);
+//        contentLinearlayout.setVisibility(View.GONE);
 
         notificationLinearlayout.setVisibility(View.GONE);
 
@@ -199,12 +199,21 @@ public class EditActivity extends AppCompatActivity {
                     break;
                 }
 
-                if(alarmCalendar == null){
+//                if(String.valueOf(contentText.getText()).equals("")){
+//                    Toast.makeText(EditActivity.this, "メモを入力してください", Toast.LENGTH_SHORT).show();
+//                    break;
+//                }
+
+                if(alarmCalendar == null) {
                     Toast.makeText(EditActivity.this, "日付を指定してください", Toast.LENGTH_SHORT).show();
                     break;
                 }
 
-                if(!ReminderObjectDao.getRecord(reminderId).getDateAndTime().equals("") ){
+//                if(!ReminderObjectDao.getRecord(reminderId).getTitleName().equals("")){
+//
+//                }
+
+                if(!ReminderObjectDao.getRecord(reminderId).getDateAndTime().equals("")){
 //                    if(alarmCalendar == null){
 //                        //セットされている時刻を再度セット
 ////                        register(Long.parseLong(ReminderObjectDao.getRecord(reminderId).getDateAndTime()));
@@ -213,12 +222,17 @@ public class EditActivity extends AppCompatActivity {
 //                    else{
                         register(alarmCalendar.getTimeInMillis());//alarmCalendar.getTimeInMillis()は、alarmCalendarにセットした時刻を取得
 //                    }
-//                    if(!ReminderObjectDao.getRecord(reminderId).getTitleName().equals(String.valueOf(titleText.getText()))){
-//
+
+
+//                    if(alarmCalendar != null){
+//                        register(alarmCalendar.getTimeInMillis());
+//                    }
+//                    else{
+//                        saveReminderData(reminderId);
 //                    }
                 }
                 else{
-                    if(reminderId == 0){ //Id=0に対応するオブジェクトはないため上のifを抜けてしまう（MainActivityではupDateのみ行い、一時的にId0を送っているため）
+                    if(reminderId == 0 && alarmCalendar != null){ //Id=0に対応するオブジェクトはないため上のifを抜けてしまう（MainActivityではupDateのみ行い、一時的にId0を送っているため）
                         register(alarmCalendar.getTimeInMillis());//時刻は入力されていないと
                     }
                     else{
@@ -243,6 +257,9 @@ public class EditActivity extends AppCompatActivity {
 
         if(!ReminderObjectDao.getRecord(reminderId).getTitleName().equals("")) {
             titleText.setText(ReminderObjectDao.getRecord(reminderId).getTitleName());
+        }
+        if(!ReminderObjectDao.getRecord(reminderId).getContent().equals("")) {
+            contentText.setText(ReminderObjectDao.getRecord(reminderId).getContent());
         }
         if(!ReminderObjectDao.getRecord(reminderId).getDateAndTime().equals("")) {
             dateTimeButton.setText(ReminderObjectDao.getRecord(reminderId).getDateAndTime());
@@ -324,6 +341,10 @@ public class EditActivity extends AppCompatActivity {
         //データ登録
         SpannableStringBuilder sb = (SpannableStringBuilder)titleText.getText();
         String strTitleText = sb.toString();
+
+        SpannableStringBuilder sb1 = (SpannableStringBuilder)contentText.getText();
+        String strContentText = sb1.toString();
+
         String strDateTimeButtonText;
 
         if(!dateTimeButton.getText().equals("なし >")){
@@ -336,6 +357,7 @@ public class EditActivity extends AppCompatActivity {
         if(reminderId == 0){
             ReminderObject dataObj = new ReminderObject();
             dataObj.setTitleName(strTitleText);
+            dataObj.setContent(strContentText);
             dataObj.setDateAndTime(strDateTimeButtonText);
             dataObj.setReminderId(reminderId);///??
             ReminderObjectDao.add(dataObj);
@@ -343,6 +365,7 @@ public class EditActivity extends AppCompatActivity {
         else{
             ReminderObject dataObj = new ReminderObject();
             dataObj.setTitleName(strTitleText);
+            dataObj.setContent(strContentText);
             dataObj.setDateAndTime(strDateTimeButtonText);
             dataObj.setReminderId(reminderId);///??
             ReminderObjectDao.update(dataObj);

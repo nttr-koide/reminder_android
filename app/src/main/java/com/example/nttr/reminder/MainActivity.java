@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 //                            intent = new Intent(getApplicationContext(), AlarmReceiver.class);
 //                            intent.setType(String.valueOf(reminderList.get(position).getObject().getReminderId()));    // このsetTypeが重要
 //
-//                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+//                            PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, ReminderObjectDao.getRecord(reminderList.get(position).getObject().getReminderId()).getReminderId(), intent, PendingIntent.FLAG_ONE_SHOT);
 //
 //                            pendingIntent.cancel();
 //                            alarmManager.cancel(pendingIntent);
